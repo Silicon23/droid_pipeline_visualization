@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DROID 3D Bounding-Box Pipeline — Episode Gallery</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-card: #ffffff;
+    --bg-sunken: #f4f5f7;
+    --fg: #16181d;
+    --fg-muted: #5d6470;
+    --fg-faint: #878e9b;
+    --border: #e2e5ea;
+    --border-strong: #cfd4dc;
+    --accent: #2f6feb;
+    --wrist: #d93a3a;
+    --ext1: #2f9e44;
+    --ext2: #2f6feb;
+    --shadow: 0 1px 2px rgba(16, 24, 40, .06), 0 4px 12px rgba(16, 24, 40, .05);
+    --shadow-hover: 0 2px 4px rgba(16, 24, 40, .08), 0 12px 28px rgba(16, 24, 40, .10);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1114;
+      --bg-card: #16181d;
+      --bg-sunken: #1c1f25;
+      --fg: #e8e9ee;
+      --fg-muted: #9aa1ae;
+      --fg-faint: #6f7683;
+      --border: #262a32;
+      --border-strong: #333843;
+      --accent: #63a0ff;
+      --wrist: #ff4444;
+      --ext1: #44cc44;
+      --ext2: #4488ff;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .4);
+      --shadow-hover: 0 2px 6px rgba(0, 0, 0, .5), 0 14px 32px rgba(0, 0, 0, .45);
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #ffffff; --bg-card: #ffffff; --bg-sunken: #f4f5f7;
+    --fg: #16181d; --fg-muted: #5d6470; --fg-faint: #878e9b;
+    --border: #e2e5ea; --border-strong: #cfd4dc; --accent: #2f6feb;
+    --wrist: #d93a3a; --ext1: #2f9e44; --ext2: #2f6feb;
+    --shadow: 0 1px 2px rgba(16,24,40,.06), 0 4px 12px rgba(16,24,40,.05);
+    --shadow-hover: 0 2px 4px rgba(16,24,40,.08), 0 12px 28px rgba(16,24,40,.10);
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1114; --bg-card: #16181d; --bg-sunken: #1c1f25;
+    --fg: #e8e9ee; --fg-muted: #9aa1ae; --fg-faint: #6f7683;
+    --border: #262a32; --border-strong: #333843; --accent: #63a0ff;
+    --wrist: #ff4444; --ext1: #44cc44; --ext2: #4488ff;
+    --shadow: 0 1px 2px rgba(0,0,0,.4);
+    --shadow-hover: 0 2px 6px rgba(0,0,0,.5), 0 14px 32px rgba(0,0,0,.45);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1560px; margin: 0 auto; padding: 40px 24px 72px; }
+
+  header { border-bottom: 1px solid var(--border); padding-bottom: 24px; margin-bottom: 32px; }
+  h1 { margin: 0 0 8px; font-size: 26px; font-weight: 650; letter-spacing: -.02em; }
+  .sub { color: var(--fg-muted); font-size: 14px; margin: 0; max-width: 76ch; }
+  .sub code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+    font-size: 12.5px; background: var(--bg-sunken); border: 1px solid var(--border);
+    border-radius: 4px; padding: 1px 5px;
+  }
+
+  .meta-bar {
+    display: flex; flex-wrap: wrap; gap: 10px 28px;
+    margin-top: 18px; font-size: 13px; color: var(--fg-muted);
+  }
+  .meta-bar b { color: var(--fg); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .legend { display: flex; gap: 16px; align-items: center; margin-left: auto; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .swatch { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+
+  .grid {
+    display: grid; gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(620px, 1fr));
+  }
+  @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    display: block; text-decoration: none; color: inherit;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden; box-shadow: var(--shadow);
+    transition: box-shadow .16s ease, border-color .16s ease, transform .16s ease;
+  }
+  .card:hover, .card:focus-visible {
+    border-color: var(--border-strong); box-shadow: var(--shadow-hover);
+    transform: translateY(-2px); outline: none;
+  }
+  .card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .card img { display: block; width: 100%; height: auto; background: var(--bg-sunken); }
+
+  .body { padding: 14px 16px 16px; }
+  .title-row { display: flex; align-items: baseline; gap: 10px; }
+  .object { font-size: 16px; font-weight: 650; letter-spacing: -.01em; }
+  .eid {
+    margin-left: auto; font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+    font-size: 12px; color: var(--fg-faint);
+  }
+  .instruction {
+    margin: 6px 0 0; color: var(--fg-muted); font-size: 13.5px;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .instruction.none { font-style: italic; color: var(--fg-faint); }
+
+  .stats {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);
+  }
+  .chip {
+    font-size: 11.5px; color: var(--fg-muted); background: var(--bg-sunken);
+    border: 1px solid var(--border); border-radius: 999px; padding: 3px 9px;
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .chip b { color: var(--fg); font-weight: 600; }
+  .chip.warn { border-color: #d9822b55; color: #b96a1a; }
+  @media (prefers-color-scheme: dark) { .chip.warn { color: #f0a860; } }
+  :root[data-theme="dark"] .chip.warn { color: #f0a860; }
+  :root[data-theme="light"] .chip.warn { color: #b96a1a; }
+
+  .status { padding: 48px 0; text-align: center; color: var(--fg-muted); }
+  .status.err { color: var(--wrist); }
+  .status code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace; font-size: 12.5px;
+  }
+
+  footer {
+    margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border);
+    color: var(--fg-faint); font-size: 12.5px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>DROID 3D Bounding-Box Pipeline</h1>
+    <p class="sub">
+      Randomly sampled episodes that completed the full pipeline
+      (step3a-2 <code>status == "success"</code>). Each preview shows the three camera
+      views &mdash; wrist, ext1, ext2 &mdash; at the frame where pose tracking was
+      registered. Select an episode to open its visualization.
+    </p>
+    <div class="meta-bar" id="metaBar"></div>
+  </header>
+
+  <p class="sub" style="margin:-14px 0 26px">
+    Diagnostic: <a href="singlecam.html">single-camera consensus gallery</a> &mdash;
+    are the boxes emitted from a lone confident camera trustworthy?
+  </p>
+
+  <main id="grid" class="grid" hidden></main>
+  <div class="status" id="status">Loading episodes&hellip;</div>
+
+  <footer id="footer"></footer>
+</div>
+
+<script>
+const fmt = n => (n === null || n === undefined) ? "—" : n.toLocaleString();
+
+function card(ep) {
+  const a = document.createElement("a");
+  a.className = "card";
+  a.href = `episode.html?eid=${encodeURIComponent(ep.episode_id)}`;
+
+  const img = document.createElement("img");
+  img.src = ep.preview;
+  img.alt = `${ep.object_name ?? "episode"} — wrist, ext1 and ext2 views of ${ep.episode_id}`;
+  img.loading = "lazy";
+  img.decoding = "async";
+  if (Array.isArray(ep.preview_size)) {
+    img.width = ep.preview_size[0];
+    img.height = ep.preview_size[1];
+  }
+  a.appendChild(img);
+
+  const body = document.createElement("div");
+  body.className = "body";
+
+  const titleRow = document.createElement("div");
+  titleRow.className = "title-row";
+  const obj = document.createElement("span");
+  obj.className = "object";
+  obj.textContent = ep.object_name ?? "(unnamed object)";
+  const eid = document.createElement("span");
+  eid.className = "eid";
+  eid.textContent = ep.episode_id;
+  titleRow.append(obj, eid);
+  body.appendChild(titleRow);
+
+  const instr = document.createElement("p");
+  instr.className = ep.instruction ? "instruction" : "instruction none";
+  instr.textContent = ep.instruction ?? "no language instruction recorded";
+  body.appendChild(instr);
+
+  const stats = document.createElement("div");
+  stats.className = "stats";
+  const tracked = ep.n_success_frames, total = ep.n_frames;
+  const pct = (tracked != null && total) ? Math.round(100 * tracked / total) : null;
+
+  const chips = [
+    [`<b>${fmt(tracked)}</b> / ${fmt(total)} frames tracked` + (pct !== null ? ` (${pct}%)` : ""),
+     pct !== null && pct < 50],
+    [`frame <b>${fmt(ep.preview_frame)}</b>` +
+     (ep.register_cam ? `, registered on <b>${ep.register_cam}</b>` : ""), false],
+  ];
+  if (ep.lab) chips.push([`lab <b>${ep.lab}</b>`, false]);
+  if (ep.date) chips.push([`${ep.date}`, false]);
+  if (ep.wrist_sensor_flipped) chips.push([`wrist sensor flipped`, true]);
+
+  for (const [html, warn] of chips) {
+    const c = document.createElement("span");
+    c.className = warn ? "chip warn" : "chip";
+    c.innerHTML = html;
+    stats.appendChild(c);
+  }
+  body.appendChild(stats);
+  a.appendChild(body);
+  return a;
+}
+
+function renderMeta(m) {
+  const src = m.generated_from ?? {};
+  const bar = document.getElementById("metaBar");
+  bar.innerHTML =
+    `<span><b>${fmt(m.n_episodes)}</b> episodes shown</span>` +
+    `<span>sampled from <b>${fmt(src.n_success_pool)}</b> successful episodes</span>` +
+    `<span>seed <b>${fmt(src.seed)}</b></span>` +
+    `<div class="legend">` +
+      `<span><i class="swatch" style="background:var(--wrist)"></i>wrist</span>` +
+      `<span><i class="swatch" style="background:var(--ext1)"></i>ext1</span>` +
+      `<span><i class="swatch" style="background:var(--ext2)"></i>ext2</span>` +
+    `</div>`;
+
+  document.getElementById("footer").textContent =
+    (src.selection ?? "") +
+    (m.n_skipped ? ` — ${m.n_skipped} candidate(s) skipped as unrenderable.` : "");
+}
+
+fetch("data/episodes.json")
+  .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
+  .then(m => {
+    renderMeta(m);
+    const grid = document.getElementById("grid");
+    for (const ep of m.episodes) grid.appendChild(card(ep));
+    document.getElementById("status").hidden = true;
+    grid.hidden = false;
+  })
+  .catch(err => {
+    const s = document.getElementById("status");
+    s.className = "status err";
+    s.innerHTML = `Could not load <code>data/episodes.json</code> — ${err.message}.<br>` +
+      `If you opened this file directly, serve the directory over HTTP instead ` +
+      `(<code>python -m http.server</code>) — browsers block <code>fetch</code> on <code>file://</code>.`;
+  });
+</script>
+</body>
+</html>

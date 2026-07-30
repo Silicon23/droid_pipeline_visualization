@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Episode — DROID 3D Bounding-Box Pipeline</title>
+<style>
+  :root {
+    --bg:#0f1114; --panel:#16181d; --sunken:#1c1f25; --fg:#e8e9ee; --fg-muted:#9aa1ae;
+    --fg-faint:#6f7683; --border:#262a32; --border-2:#333843; --accent:#63a0ff;
+    --orange:#ffa500; --ok:#3ecf8e; --warn:#f0a860; --err:#ff6b6b;
+    --wrist:#ff4444; --ext1:#44cc44; --ext2:#4488ff;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg:#fbfbfc; --panel:#fff; --sunken:#f4f5f7; --fg:#16181d; --fg-muted:#5d6470;
+      --fg-faint:#878e9b; --border:#e2e5ea; --border-2:#cfd4dc; --accent:#2f6feb;
+      --orange:#c47700; --ok:#1a7f4b; --warn:#a86216; --err:#c8341f;
+      --wrist:#d93a3a; --ext1:#2f9e44; --ext2:#2f6feb;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg:#0f1114; --panel:#16181d; --sunken:#1c1f25; --fg:#e8e9ee; --fg-muted:#9aa1ae;
+    --fg-faint:#6f7683; --border:#262a32; --border-2:#333843; --accent:#63a0ff;
+    --orange:#ffa500; --ok:#3ecf8e; --warn:#f0a860; --err:#ff6b6b;
+    --wrist:#ff4444; --ext1:#44cc44; --ext2:#4488ff;
+  }
+  :root[data-theme="light"] {
+    --bg:#fbfbfc; --panel:#fff; --sunken:#f4f5f7; --fg:#16181d; --fg-muted:#5d6470;
+    --fg-faint:#878e9b; --border:#e2e5ea; --border-2:#cfd4dc; --accent:#2f6feb;
+    --orange:#c47700; --ok:#1a7f4b; --warn:#a86216; --err:#c8341f;
+    --wrist:#d93a3a; --ext1:#2f9e44; --ext2:#2f6feb;
+  }
+
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--bg); color:var(--fg);
+    font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a { color:var(--accent); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  .mono, code { font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace; }
+  .wrap { max-width:1400px; margin:0 auto; padding:0 24px 96px; }
+
+  /* ---- header ---- */
+  header { padding:22px 0 16px; }
+  h1 { margin:10px 0 2px; font-size:25px; font-weight:650; letter-spacing:-.02em; }
+  .eid { font-family:ui-monospace,Menlo,monospace; font-size:13px; color:var(--fg-faint); }
+  .subline { color:var(--fg-muted); font-size:14px; margin-top:6px; }
+
+  /* ---- sticky transport ---- */
+  .transport {
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+    padding:11px 18px; margin-bottom:26px;
+    background:color-mix(in srgb, var(--panel) 92%, transparent);
+    backdrop-filter:blur(10px);
+    border:1px solid var(--border); border-radius:11px;
+    box-shadow:0 3px 14px rgba(0,0,0,.16);
+  }
+  .transport .grow { flex:1; min-width:180px; }
+  #timeline { width:100%; accent-color:var(--accent); }
+  .frameLabel {
+    font-family:ui-monospace,Menlo,monospace; font-size:12.5px; color:var(--fg-muted);
+    font-variant-numeric:tabular-nums; white-space:nowrap;
+  }
+  .syncNote { font-size:12px; color:var(--fg-faint); white-space:nowrap; }
+
+  button, select {
+    background:var(--sunken); color:var(--fg); border:1px solid var(--border-2);
+    border-radius:8px; padding:7px 13px; font:inherit; font-size:13.5px; cursor:pointer;
+  }
+  button:hover, select:hover { border-color:var(--accent); }
+  button.primary { background:var(--accent); border-color:var(--accent); color:#08101f; font-weight:650; min-width:82px; }
+  .speedWrap { display:flex; align-items:center; gap:7px; font-size:13px; color:var(--fg-muted); }
+
+  /* ---- sections ---- */
+  section { margin:0 0 44px; }
+  .secHead { display:flex; align-items:baseline; gap:12px; margin-bottom:6px; }
+  .secNum {
+    font-family:ui-monospace,Menlo,monospace; font-size:12px; color:var(--fg-faint);
+    border:1px solid var(--border); border-radius:5px; padding:1px 7px;
+  }
+  h2 { margin:0; font-size:18px; font-weight:650; letter-spacing:-.01em; }
+  .secDesc { color:var(--fg-muted); font-size:13.5px; margin:0 0 16px; max-width:88ch; }
+
+  /* ---- camera grid ---- */
+  .camgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media (max-width:900px) { .camgrid { grid-template-columns:1fr; } }
+  .cam { background:var(--panel); border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+  .cam video, .cam img { display:block; width:100%; height:auto; background:#000; }
+  .camCap {
+    display:flex; align-items:center; gap:8px; padding:8px 11px;
+    border-top:1px solid var(--border); font-size:12.5px; color:var(--fg-muted);
+  }
+  .camCap .dot { width:9px; height:9px; border-radius:2px; flex:none; }
+  .camCap .name { font-weight:650; color:var(--fg); letter-spacing:.02em; }
+  .camCap .meta { margin-left:auto; font-family:ui-monospace,Menlo,monospace; font-size:11.5px;
+                  color:var(--fg-faint); font-variant-numeric:tabular-nums; }
+  .cam.missing { display:flex; align-items:center; justify-content:center;
+                 min-height:190px; color:var(--fg-faint); font-size:13px; text-align:center; padding:20px; }
+
+  /* ---- cards / verdicts ---- */
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:18px 20px; }
+  .badge {
+    display:inline-block; padding:3px 11px; border-radius:999px; font-size:12.5px;
+    font-weight:650; letter-spacing:.02em; border:1px solid;
+  }
+  .badge.ok { color:var(--ok); border-color:color-mix(in srgb,var(--ok) 45%,transparent);
+              background:color-mix(in srgb,var(--ok) 12%,transparent); }
+  .badge.bad { color:var(--err); border-color:color-mix(in srgb,var(--err) 45%,transparent);
+               background:color-mix(in srgb,var(--err) 12%,transparent); }
+  .badge.warn { color:var(--warn); border-color:color-mix(in srgb,var(--warn) 45%,transparent);
+                background:color-mix(in srgb,var(--warn) 12%,transparent); }
+  .badge.neutral { color:var(--fg-muted); border-color:var(--border-2); background:var(--sunken); }
+
+  .labelRow { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
+  .bigLabel { font-size:21px; font-weight:650; letter-spacing:-.01em; }
+  .fieldName { font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:var(--fg-faint); }
+  .quote {
+    margin:0; padding:11px 15px; background:var(--sunken); border-left:3px solid var(--border-2);
+    border-radius:0 7px 7px 0; color:var(--fg-muted); font-size:14px;
+  }
+  .quote + .fieldName { margin-top:16px; display:block; }
+  .instrList { margin:8px 0 0; padding-left:20px; color:var(--fg-muted); font-size:14px; }
+  .instrList li { margin:3px 0; }
+  .none { font-style:italic; color:var(--fg-faint); }
+
+  .kvGrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px 24px; margin-top:16px;
+            padding-top:14px; border-top:1px solid var(--border); }
+  .kv .k { font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--fg-faint); }
+  .kv .v { font-family:ui-monospace,Menlo,monospace; font-size:13px; font-variant-numeric:tabular-nums; }
+
+  .camObjs { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:12px; margin-top:14px; }
+  .camObj { background:var(--sunken); border:1px solid var(--border); border-radius:8px; padding:11px 13px; }
+  .camObj.disagree { border-color:color-mix(in srgb,var(--err) 55%,transparent); }
+  .camObj .hd { display:flex; align-items:center; gap:7px; margin-bottom:5px; }
+  .camObj .hd .dot { width:9px; height:9px; border-radius:2px; }
+  .camObj .hd .nm { font-weight:650; font-size:12.5px; letter-spacing:.02em; }
+  .camObj .tx { font-size:13px; color:var(--fg-muted); }
+
+  .caveat { margin-top:16px; font-size:12.5px; color:var(--fg-faint); line-height:1.55;
+            border-top:1px solid var(--border); padding-top:12px; }
+
+  /* ---- pointcloud ---- */
+  .cloudWrap { display:flex; flex-direction:column; gap:16px; }
+  #cloudHost { width:100%; height:560px; position:relative;
+               background:#0f1114; border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+  #cloudHost canvas { display:block; }
+  #cloudStatus { position:absolute; top:11px; left:11px; padding:4px 10px; border-radius:999px;
+                 background:rgba(0,0,0,.62); color:#cfd4dc; font-size:12px; pointer-events:none; }
+  .cloudCtrls { display:grid; gap:20px 28px;
+                grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); align-items:start; }
+  .ctlGroup { min-width:0; }
+  .ctlWide { grid-column:1/-1; }
+  @media (max-width:700px) { .cloudCtrls { grid-template-columns:1fr; } }
+  .ctlRow { display:flex; align-items:center; gap:10px; margin-bottom:11px; }
+  .ctlRow label { flex:none; width:72px; color:var(--fg-muted); font-size:12.5px; }
+  .ctlRow input[type=range] { flex:1; min-width:0; accent-color:var(--accent); }
+  .ctlRow output { width:44px; text-align:right; font-family:ui-monospace,Menlo,monospace;
+                   font-size:12px; color:var(--fg-muted); }
+  .ctlRow select { flex:1; }
+  .chk { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--fg-muted); cursor:pointer; }
+  .chk input { accent-color:var(--orange); }
+  .hint { color:var(--fg-faint); font-size:11.5px; line-height:1.5; margin:10px 0 0; }
+  .legendRow { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--fg-muted); margin:5px 0 0; }
+  .legendRow .sw { width:11px; height:11px; border-radius:2px; flex:none; }
+  #camBoxStates { font-family:ui-monospace,Menlo,monospace; font-size:11.5px; margin-top:8px; }
+
+  #loading { padding:60px 0; color:var(--fg-muted); }
+  #loading.err { color:var(--err); }
+</style>
+<script type="importmap">
+{ "imports": { "three": "./vendor/three.module.js" } }
+</script>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a href="index.html">&larr; All episodes</a>
+    <h1 id="title">&nbsp;</h1>
+    <div class="eid" id="eid"></div>
+    <div class="subline" id="subline"></div>
+  </header>
+
+  <div id="loading">Loading episode&hellip;</div>
+
+  <div id="app" hidden>
+
+    <div class="transport">
+      <button class="primary" id="playBtn">Play</button>
+      <div class="speedWrap">
+        <label for="speedSel">Speed</label>
+        <select id="speedSel">
+          <option value="0.25">0.25&times;</option>
+          <option value="0.5" selected>0.5&times;</option>
+          <option value="1">1&times;</option>
+          <option value="2">2&times;</option>
+        </select>
+      </div>
+      <div class="grow"><input type="range" id="timeline" min="0" max="0" value="0" step="1"></div>
+      <span class="frameLabel">frame <b id="frameLabel">0 / 0</b></span>
+      <span class="syncNote">drives every visualization on this page</span>
+    </div>
+
+    <section id="sec-input">
+      <div class="secHead"><span class="secNum">Input</span><h2>Camera streams</h2></div>
+      <p class="secDesc">The three synchronized DROID camera streams — a moving wrist camera and
+        two static externals. Only the left eye of each side-by-side stereo recording is shown,
+        which is what the whole pipeline consumes.</p>
+      <div class="camgrid" id="inputVideos"></div>
+      <div class="card" style="margin-top:16px">
+        <span class="fieldName">Episode description (DROID language instructions)</span>
+        <div id="episodeDesc"></div>
+        <p class="hint">This is the text the step-1 VLM is given alongside the video.</p>
+      </div>
+    </section>
+
+    <section id="sec-step1">
+      <div class="secHead"><span class="secNum">Step 1</span><h2>Object identification &mdash; VLM</h2></div>
+      <p class="secDesc">A vision-language model watches the episode and names the manipulated
+        object, then judges whether it is suitable for 3D box tracking at all.</p>
+      <div class="card" id="step1Card"></div>
+    </section>
+
+    <section id="sec-step1b">
+      <div class="secHead"><span class="secNum">Step 1b</span><h2>Rigidity gate &mdash; VLM</h2></div>
+      <p class="secDesc">Pose tracking assumes a rigid object. A second VLM pass decides whether
+        this object holds its shape under manipulation.</p>
+      <div class="card" id="step1bCard"></div>
+    </section>
+
+    <section id="sec-seeds">
+      <div class="secHead"><span class="secNum">Step 3a-1</span><h2>Seed masks &mdash; SAM3 image mode</h2></div>
+      <p class="secDesc">SAM3 is run per frame on every camera; the highest-scoring frame in each
+        view becomes that camera's seed. These are single still frames, so they do not move with
+        playback.</p>
+      <div class="camgrid" id="seedGrid"></div>
+    </section>
+
+
+    <section id="sec-track">
+      <div class="secHead"><span class="secNum">Step 3a-1 v2</span><h2>Propagated mask tracklets &mdash; SAM3 video mode</h2></div>
+      <p class="secDesc">Each camera's seed mask is propagated through the whole clip by the SAM3
+        video predictor. Where the overlay disappears, the tracker judged the object not visible.</p>
+      <div class="camgrid" id="trackVideos"></div>
+    </section>
+
+    <section id="sec-box">
+      <div class="secHead"><span class="secNum">Step 3a-2</span><h2>Tracked 3D box &mdash; reprojected per view</h2></div>
+      <p class="secDesc">The final world-frame box from FoundationPose, projected back into each
+        camera. The wrist camera reprojects through its per-frame pose; the two externals use the
+        optimized static extrinsics. Where no box is drawn, the tracker had no reliable pose for
+        that frame.</p>
+      <div class="camgrid" id="boxVideos"></div>
+    </section>
+
+    <section id="sec-cloud">
+      <div class="secHead"><span class="secNum">4D</span><h2>Fused pointcloud</h2></div>
+      <p class="secDesc">All three depth streams unprojected into the world (Franka base) frame and
+        played back over time, with the tracked 3D box. Drag to orbit, scroll to zoom.</p>
+      <div class="cloudWrap">
+        <div id="cloudHost"><div id="cloudStatus" hidden></div></div>
+
+        <div class="card cloudCtrls">
+          <div class="ctlGroup">
+            <span class="fieldName">Quality</span>
+            <div class="ctlRow" style="margin-top:8px">
+              <select id="presetSel">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+            <p class="hint" id="presetInfo"></p>
+          </div>
+
+          <div class="ctlGroup">
+            <span class="fieldName">Display</span>
+            <div class="ctlRow" style="margin-top:8px">
+              <label for="sizeRange">Points</label>
+              <input type="range" id="sizeRange" min="0.5" max="6" step="0.5" value="2">
+              <output id="sizeLabel">2.0</output>
+            </div>
+            <div class="ctlRow"><label class="chk"><input type="checkbox" id="pointsToggle" checked> Show points</label></div>
+            <div class="ctlRow"><label class="chk"><input type="checkbox" id="boxToggle" checked> Fused 3D box</label></div>
+            <div class="ctlRow"><label class="chk"><input type="checkbox" id="camBoxToggle"> Per-camera boxes</label></div>
+            <div class="ctlRow"><label class="chk"><input type="checkbox" id="frustumToggle"> Camera frustums</label></div>
+            <button style="width:100%;margin-top:4px" id="resetView">Reset view</button>
+          </div>
+
+          <div class="ctlGroup">
+            <span class="fieldName">This frame</span>
+            <div class="kvGrid" style="grid-template-columns:1fr 1fr; margin-top:8px; padding-top:0; border-top:none">
+              <div class="kv"><div class="k">points</div><div class="v" id="pointCount">&mdash;</div></div>
+              <div class="kv"><div class="k">consensus cams</div><div class="v" id="consensus">&mdash;</div></div>
+              <div class="kv" style="grid-column:1/-1"><div class="k">track status</div><div class="v" id="frameStatus">&mdash;</div></div>
+            </div>
+            <div id="camBoxStates" style="margin-top:10px"></div>
+          </div>
+
+          <div class="ctlGroup ctlWide" id="camBoxPanel" hidden>
+            <span class="fieldName">Per-camera boxes</span>
+            <div id="camBoxLegend">
+              <div class="legendRow"><i class="sw" style="background:#22cc55"></i>in the pipeline&rsquo;s agreeing clique</div>
+              <div class="legendRow"><i class="sw" style="background:#ff3b30"></i>confident, but outside it &mdash; the pipeline deemed this disagreement</div>
+              <div class="legendRow"><i class="sw" style="background:#8b93a1;opacity:.5"></i>below the confidence bar &mdash; abstained, never entered the vote</div>
+            </div>
+            <p class="hint" id="camBoxNote"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script type="module" src="episode.js"></script>
+</body>
+</html>

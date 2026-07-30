@@ -1,0 +1,1534 @@
+{
+ "edge_threshold": 0.15,
+ "study": {
+  "threshold": 0.15,
+  "n_filtered_with_pose": 1993,
+  "median_edge": 2.1344165571280747,
+  "admit_if_raised_to": {
+   "0.2": 19,
+   "0.3": 47,
+   "0.5": 392,
+   "1.0": 942,
+   "2.0": 992
+  },
+  "corroboration": {
+   "n": 1993,
+   "would_agree": 481,
+   "trans_within_5cm": 1383,
+   "bands": [
+    {
+     "lo": 0.15,
+     "hi": 0.3,
+     "n": 47,
+     "would_agree_pct": 63.8,
+     "median_trans_cm": 3.9,
+     "median_rot_deg": 19.9
+    },
+    {
+     "lo": 0.3,
+     "hi": 0.5,
+     "n": 345,
+     "would_agree_pct": 35.4,
+     "median_trans_cm": 3.4,
+     "median_rot_deg": 68.5
+    },
+    {
+     "lo": 0.5,
+     "hi": 1.0,
+     "n": 550,
+     "would_agree_pct": 36.5,
+     "median_trans_cm": 3.4,
+     "median_rot_deg": 63.0
+    },
+    {
+     "lo": 1.0,
+     "hi": 5.0,
+     "n": 302,
+     "would_agree_pct": 17.5,
+     "median_trans_cm": 10.4,
+     "median_rot_deg": 46.9
+    },
+    {
+     "lo": 5.0,
+     "hi": null,
+     "n": 749,
+     "would_agree_pct": 10.0,
+     "median_trans_cm": 1.1,
+     "median_rot_deg": 115.7
+    }
+   ]
+  }
+ },
+ "samples": [
+  {
+   "episode_id": "shard01010_ep008",
+   "object_name": "wooden block",
+   "frame": 0,
+   "n_frames": 169,
+   "status": "bwd_single",
+   "lone_cam": "wrist",
+   "edges": {
+    "wrist": 0.0342,
+    "ext1": 5.1112,
+    "ext2": 5.3237
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "ext1": 15.1,
+    "ext2": 19.2
+   },
+   "pose_delta": {
+    "ext1": {
+     "trans_cm": 14.9,
+     "rot_deg": 50.2,
+     "would_agree": false
+    },
+    "ext2": {
+     "trans_cm": 18.9,
+     "rot_deg": 50.7,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01010_ep008_f00000.jpg"
+  },
+  {
+   "episode_id": "shard01010_ep008",
+   "object_name": "wooden block",
+   "frame": 32,
+   "n_frames": 169,
+   "status": "bwd_single",
+   "lone_cam": "wrist",
+   "edges": {
+    "wrist": 0.0,
+    "ext1": 4.8914,
+    "ext2": 3.6538
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "ext1": 13.6,
+    "ext2": 14.7
+   },
+   "pose_delta": {
+    "ext1": {
+     "trans_cm": 13.2,
+     "rot_deg": 43.1,
+     "would_agree": false
+    },
+    "ext2": {
+     "trans_cm": 14.3,
+     "rot_deg": 59.1,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01010_ep008_f00032.jpg"
+  },
+  {
+   "episode_id": "shard01010_ep008",
+   "object_name": "wooden block",
+   "frame": 65,
+   "n_frames": 169,
+   "status": "fwd_single",
+   "lone_cam": "wrist",
+   "edges": {
+    "wrist": 0.0,
+    "ext1": 1.0144,
+    "ext2": 2.8235
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "ext1": 6.6,
+    "ext2": 3.8
+   },
+   "pose_delta": {
+    "ext1": {
+     "trans_cm": 6.5,
+     "rot_deg": 13.8,
+     "would_agree": false
+    },
+    "ext2": {
+     "trans_cm": 3.6,
+     "rot_deg": 6.7,
+     "would_agree": true
+    }
+   },
+   "image": "assets/singlecam/shard01010_ep008_f00065.jpg"
+  },
+  {
+   "episode_id": "shard01010_ep008",
+   "object_name": "wooden block",
+   "frame": 98,
+   "n_frames": 169,
+   "status": "fwd_single",
+   "lone_cam": "wrist",
+   "edges": {
+    "wrist": 0.0,
+    "ext1": 2.2818,
+    "ext2": 3.2583
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "ext1": 14.6,
+    "ext2": 3.6
+   },
+   "pose_delta": {
+    "ext1": {
+     "trans_cm": 14.3,
+     "rot_deg": 39.9,
+     "would_agree": false
+    },
+    "ext2": {
+     "trans_cm": 3.0,
+     "rot_deg": 20.0,
+     "would_agree": true
+    }
+   },
+   "image": "assets/singlecam/shard01010_ep008_f00098.jpg"
+  },
+  {
+   "episode_id": "shard01010_ep008",
+   "object_name": "wooden block",
+   "frame": 135,
+   "n_frames": 169,
+   "status": "bwd_single",
+   "lone_cam": "ext1",
+   "edges": {
+    "wrist": 8.4777,
+    "ext1": 0.0,
+    "ext2": 46.5345
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 11.0,
+    "ext2": 3.8
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 10.4,
+     "rot_deg": 84.7,
+     "would_agree": false
+    },
+    "ext2": {
+     "trans_cm": 2.8,
+     "rot_deg": 39.7,
+     "would_agree": true
+    }
+   },
+   "image": "assets/singlecam/shard01010_ep008_f00135.jpg"
+  },
+  {
+   "episode_id": "shard01010_ep008",
+   "object_name": "wooden block",
+   "frame": 168,
+   "n_frames": 169,
+   "status": "fwd_single",
+   "lone_cam": "ext1",
+   "edges": {
+    "wrist": 19.3489,
+    "ext1": 0.0037,
+    "ext2": 42.6445
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 5.4,
+    "ext2": 2.1
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 4.8,
+     "rot_deg": 30.0,
+     "would_agree": true
+    },
+    "ext2": {
+     "trans_cm": 1.4,
+     "rot_deg": 20.8,
+     "would_agree": true
+    }
+   },
+   "image": "assets/singlecam/shard01010_ep008_f00168.jpg"
+  },
+  {
+   "episode_id": "shard01094_ep013",
+   "object_name": "cup",
+   "frame": 0,
+   "n_frames": 547,
+   "status": "bwd_single",
+   "lone_cam": "ext2",
+   "edges": {
+    "wrist": 2.2565,
+    "ext1": 7.0394,
+    "ext2": 0.1082
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 16.2,
+    "ext1": 4.5
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 13.2,
+     "rot_deg": 164.4,
+     "would_agree": false
+    },
+    "ext1": {
+     "trans_cm": 1.3,
+     "rot_deg": 113.4,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01094_ep013_f00000.jpg"
+  },
+  {
+   "episode_id": "shard01094_ep013",
+   "object_name": "cup",
+   "frame": 109,
+   "n_frames": 547,
+   "status": "bwd_single",
+   "lone_cam": "ext2",
+   "edges": {
+    "wrist": 0.6222,
+    "ext1": 6.9847,
+    "ext2": 0.109
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 6.8,
+    "ext1": 5.6
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 4.0,
+     "rot_deg": 123.3,
+     "would_agree": false
+    },
+    "ext1": {
+     "trans_cm": 1.1,
+     "rot_deg": 126.3,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01094_ep013_f00109.jpg"
+  },
+  {
+   "episode_id": "shard01094_ep013",
+   "object_name": "cup",
+   "frame": 218,
+   "n_frames": 547,
+   "status": "bwd_single",
+   "lone_cam": "ext2",
+   "edges": {
+    "wrist": 0.5741,
+    "ext1": 6.9956,
+    "ext2": 0.109
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 4.4,
+    "ext1": 4.5
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 0.6,
+     "rot_deg": 152.2,
+     "would_agree": false
+    },
+    "ext1": {
+     "trans_cm": 1.0,
+     "rot_deg": 115.2,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01094_ep013_f00218.jpg"
+  },
+  {
+   "episode_id": "shard01094_ep013",
+   "object_name": "cup",
+   "frame": 327,
+   "n_frames": 547,
+   "status": "bwd_single",
+   "lone_cam": "ext2",
+   "edges": {
+    "wrist": 0.35,
+    "ext1": 6.9949,
+    "ext2": 0.1094
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 6.4,
+    "ext1": 4.7
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 4.7,
+     "rot_deg": 80.9,
+     "would_agree": false
+    },
+    "ext1": {
+     "trans_cm": 0.9,
+     "rot_deg": 151.7,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01094_ep013_f00327.jpg"
+  },
+  {
+   "episode_id": "shard01094_ep013",
+   "object_name": "cup",
+   "frame": 437,
+   "n_frames": 547,
+   "status": "fwd_single",
+   "lone_cam": "ext2",
+   "edges": {
+    "wrist": 0.8383,
+    "ext1": 7.0761,
+    "ext2": 0.1068
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 5.7,
+    "ext1": 1.8
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 4.5,
+     "rot_deg": 168.1,
+     "would_agree": false
+    },
+    "ext1": {
+     "trans_cm": 0.8,
+     "rot_deg": 85.9,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01094_ep013_f00437.jpg"
+  },
+  {
+   "episode_id": "shard01094_ep013",
+   "object_name": "cup",
+   "frame": 546,
+   "n_frames": 547,
+   "status": "fwd_single",
+   "lone_cam": "ext2",
+   "edges": {
+    "wrist": 5.612,
+    "ext1": 7.0047,
+    "ext2": 0.1081
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 28.1,
+    "ext1": 5.3
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 27.1,
+     "rot_deg": 131.7,
+     "would_agree": false
+    },
+    "ext1": {
+     "trans_cm": 0.9,
+     "rot_deg": 123.5,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01094_ep013_f00546.jpg"
+  },
+  {
+   "episode_id": "shard01350_ep026",
+   "object_name": "broom",
+   "frame": 0,
+   "n_frames": 505,
+   "status": "bwd_single",
+   "lone_cam": "wrist",
+   "edges": {
+    "wrist": 0.0579,
+    "ext1": null,
+    "ext2": null
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "ext1": 4.0,
+    "ext2": 4.9
+   },
+   "pose_delta": {
+    "ext1": {
+     "trans_cm": 3.7,
+     "rot_deg": 1.6,
+     "would_agree": true
+    },
+    "ext2": {
+     "trans_cm": 3.4,
+     "rot_deg": 7.6,
+     "would_agree": true
+    }
+   },
+   "image": "assets/singlecam/shard01350_ep026_f00000.jpg"
+  },
+  {
+   "episode_id": "shard01350_ep026",
+   "object_name": "broom",
+   "frame": 40,
+   "n_frames": 505,
+   "status": "bwd_single",
+   "lone_cam": "wrist",
+   "edges": {
+    "wrist": 0.0386,
+    "ext1": null,
+    "ext2": null
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "ext1": 2.6,
+    "ext2": 2.7
+   },
+   "pose_delta": {
+    "ext1": {
+     "trans_cm": 1.7,
+     "rot_deg": 6.7,
+     "would_agree": true
+    },
+    "ext2": {
+     "trans_cm": 1.6,
+     "rot_deg": 4.5,
+     "would_agree": true
+    }
+   },
+   "image": "assets/singlecam/shard01350_ep026_f00040.jpg"
+  },
+  {
+   "episode_id": "shard01350_ep026",
+   "object_name": "broom",
+   "frame": 80,
+   "n_frames": 505,
+   "status": "fwd_single",
+   "lone_cam": "wrist",
+   "edges": {
+    "wrist": 0.0064,
+    "ext1": null,
+    "ext2": null
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "ext1": 1.6,
+    "ext2": 2.4
+   },
+   "pose_delta": {
+    "ext1": {
+     "trans_cm": 0.8,
+     "rot_deg": 6.9,
+     "would_agree": true
+    },
+    "ext2": {
+     "trans_cm": 1.2,
+     "rot_deg": 7.3,
+     "would_agree": true
+    }
+   },
+   "image": "assets/singlecam/shard01350_ep026_f00080.jpg"
+  },
+  {
+   "episode_id": "shard01350_ep026",
+   "object_name": "broom",
+   "frame": 120,
+   "n_frames": 505,
+   "status": "fwd_single",
+   "lone_cam": "wrist",
+   "edges": {
+    "wrist": 0.0004,
+    "ext1": null,
+    "ext2": null
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "ext1": 10.9,
+    "ext2": 3.2
+   },
+   "pose_delta": {
+    "ext1": {
+     "trans_cm": 3.3,
+     "rot_deg": 51.9,
+     "would_agree": false
+    },
+    "ext2": {
+     "trans_cm": 2.0,
+     "rot_deg": 7.8,
+     "would_agree": true
+    }
+   },
+   "image": "assets/singlecam/shard01350_ep026_f00120.jpg"
+  },
+  {
+   "episode_id": "shard01350_ep026",
+   "object_name": "broom",
+   "frame": 159,
+   "n_frames": 505,
+   "status": "fwd_single",
+   "lone_cam": "wrist",
+   "edges": {
+    "wrist": 0.0479,
+    "ext1": null,
+    "ext2": null
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "ext1": 17.4,
+    "ext2": 5.5
+   },
+   "pose_delta": {
+    "ext1": {
+     "trans_cm": 10.0,
+     "rot_deg": 86.5,
+     "would_agree": false
+    },
+    "ext2": {
+     "trans_cm": 0.3,
+     "rot_deg": 22.7,
+     "would_agree": true
+    }
+   },
+   "image": "assets/singlecam/shard01350_ep026_f00159.jpg"
+  },
+  {
+   "episode_id": "shard01350_ep026",
+   "object_name": "broom",
+   "frame": 354,
+   "n_frames": 505,
+   "status": "fwd_single",
+   "lone_cam": "wrist",
+   "edges": {
+    "wrist": 0.005,
+    "ext1": null,
+    "ext2": null
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "ext1": 4.2,
+    "ext2": 5.9
+   },
+   "pose_delta": {
+    "ext1": {
+     "trans_cm": 2.5,
+     "rot_deg": 9.3,
+     "would_agree": true
+    },
+    "ext2": {
+     "trans_cm": 3.4,
+     "rot_deg": 16.0,
+     "would_agree": true
+    }
+   },
+   "image": "assets/singlecam/shard01350_ep026_f00354.jpg"
+  },
+  {
+   "episode_id": "shard01525_ep014",
+   "object_name": "lid",
+   "frame": 0,
+   "n_frames": 223,
+   "status": "bwd_single",
+   "lone_cam": "ext1",
+   "edges": {
+    "wrist": 4.5279,
+    "ext1": 0.1439,
+    "ext2": 0.2711
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 17.0,
+    "ext2": 11.5
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 10.2,
+     "rot_deg": 71.2,
+     "would_agree": false
+    },
+    "ext2": {
+     "trans_cm": 8.2,
+     "rot_deg": 19.9,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01525_ep014_f00000.jpg"
+  },
+  {
+   "episode_id": "shard01525_ep014",
+   "object_name": "lid",
+   "frame": 108,
+   "n_frames": 223,
+   "status": "fwd_single",
+   "lone_cam": "ext2",
+   "edges": {
+    "wrist": 9.0546,
+    "ext1": 0.3075,
+    "ext2": 0.1334
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 3.0,
+    "ext1": 3.6
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 1.0,
+     "rot_deg": 10.5,
+     "would_agree": true
+    },
+    "ext1": {
+     "trans_cm": 1.0,
+     "rot_deg": 12.7,
+     "would_agree": true
+    }
+   },
+   "image": "assets/singlecam/shard01525_ep014_f00108.jpg"
+  },
+  {
+   "episode_id": "shard01525_ep014",
+   "object_name": "lid",
+   "frame": 144,
+   "n_frames": 223,
+   "status": "bwd_single",
+   "lone_cam": "ext1",
+   "edges": {
+    "wrist": 0.1762,
+    "ext1": 0.0477,
+    "ext2": 2.3532
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 4.3,
+    "ext2": 3.8
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 4.0,
+     "rot_deg": 2.0,
+     "would_agree": true
+    },
+    "ext2": {
+     "trans_cm": 3.3,
+     "rot_deg": 6.5,
+     "would_agree": true
+    }
+   },
+   "image": "assets/singlecam/shard01525_ep014_f00144.jpg"
+  },
+  {
+   "episode_id": "shard01525_ep014",
+   "object_name": "lid",
+   "frame": 149,
+   "n_frames": 223,
+   "status": "bwd_single",
+   "lone_cam": "ext1",
+   "edges": {
+    "wrist": 0.1751,
+    "ext1": 0.0467,
+    "ext2": 2.3269
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 4.4,
+    "ext2": 3.1
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 4.1,
+     "rot_deg": 2.0,
+     "would_agree": true
+    },
+    "ext2": {
+     "trans_cm": 2.6,
+     "rot_deg": 5.4,
+     "would_agree": true
+    }
+   },
+   "image": "assets/singlecam/shard01525_ep014_f00149.jpg"
+  },
+  {
+   "episode_id": "shard01525_ep014",
+   "object_name": "lid",
+   "frame": 155,
+   "n_frames": 223,
+   "status": "bwd_single",
+   "lone_cam": "ext1",
+   "edges": {
+    "wrist": 0.17,
+    "ext1": 0.0468,
+    "ext2": 2.296
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 5.4,
+    "ext2": 2.4
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 4.0,
+     "rot_deg": 7.1,
+     "would_agree": true
+    },
+    "ext2": {
+     "trans_cm": 1.9,
+     "rot_deg": 4.4,
+     "would_agree": true
+    }
+   },
+   "image": "assets/singlecam/shard01525_ep014_f00155.jpg"
+  },
+  {
+   "episode_id": "shard01525_ep014",
+   "object_name": "lid",
+   "frame": 222,
+   "n_frames": 223,
+   "status": "fwd_single",
+   "lone_cam": "ext1",
+   "edges": {
+    "wrist": 0.3637,
+    "ext1": 0.0838,
+    "ext2": 2.1903
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 13.0,
+    "ext2": 1.6
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 10.6,
+     "rot_deg": 13.6,
+     "would_agree": false
+    },
+    "ext2": {
+     "trans_cm": 1.2,
+     "rot_deg": 4.2,
+     "would_agree": true
+    }
+   },
+   "image": "assets/singlecam/shard01525_ep014_f00222.jpg"
+  },
+  {
+   "episode_id": "shard01788_ep032",
+   "object_name": "sneaker",
+   "frame": 10,
+   "n_frames": 390,
+   "status": "bwd_single",
+   "lone_cam": "wrist",
+   "edges": {
+    "wrist": 0.0821,
+    "ext1": 0.5927,
+    "ext2": 0.317
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "ext1": 15.5,
+    "ext2": 14.1
+   },
+   "pose_delta": {
+    "ext1": {
+     "trans_cm": 7.9,
+     "rot_deg": 52.9,
+     "would_agree": false
+    },
+    "ext2": {
+     "trans_cm": 7.0,
+     "rot_deg": 48.4,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01788_ep032_f00010.jpg"
+  },
+  {
+   "episode_id": "shard01788_ep032",
+   "object_name": "sneaker",
+   "frame": 70,
+   "n_frames": 390,
+   "status": "fwd_single",
+   "lone_cam": "wrist",
+   "edges": {
+    "wrist": 0.0091,
+    "ext1": 0.591,
+    "ext2": 0.3365
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "ext1": 5.6,
+    "ext2": 4.0
+   },
+   "pose_delta": {
+    "ext1": {
+     "trans_cm": 3.1,
+     "rot_deg": 13.8,
+     "would_agree": true
+    },
+    "ext2": {
+     "trans_cm": 2.5,
+     "rot_deg": 8.5,
+     "would_agree": true
+    }
+   },
+   "image": "assets/singlecam/shard01788_ep032_f00070.jpg"
+  },
+  {
+   "episode_id": "shard01788_ep032",
+   "object_name": "sneaker",
+   "frame": 124,
+   "n_frames": 390,
+   "status": "fwd_single",
+   "lone_cam": "wrist",
+   "edges": {
+    "wrist": 0.0248,
+    "ext1": 0.7337,
+    "ext2": 0.3218
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "ext1": 3.5,
+    "ext2": 11.0
+   },
+   "pose_delta": {
+    "ext1": {
+     "trans_cm": 2.8,
+     "rot_deg": 5.3,
+     "would_agree": true
+    },
+    "ext2": {
+     "trans_cm": 3.9,
+     "rot_deg": 41.4,
+     "would_agree": true
+    }
+   },
+   "image": "assets/singlecam/shard01788_ep032_f00124.jpg"
+  },
+  {
+   "episode_id": "shard01788_ep032",
+   "object_name": "sneaker",
+   "frame": 193,
+   "n_frames": 390,
+   "status": "fwd_single",
+   "lone_cam": "wrist",
+   "edges": {
+    "wrist": 0.0,
+    "ext1": 0.6405,
+    "ext2": 0.3364
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "ext1": 14.9,
+    "ext2": 20.7
+   },
+   "pose_delta": {
+    "ext1": {
+     "trans_cm": 10.6,
+     "rot_deg": 50.0,
+     "would_agree": false
+    },
+    "ext2": {
+     "trans_cm": 12.0,
+     "rot_deg": 68.5,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01788_ep032_f00193.jpg"
+  },
+  {
+   "episode_id": "shard01788_ep032",
+   "object_name": "sneaker",
+   "frame": 297,
+   "n_frames": 390,
+   "status": "fwd_single",
+   "lone_cam": "wrist",
+   "edges": {
+    "wrist": 0.0023,
+    "ext1": 0.7754,
+    "ext2": 0.5356
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "ext1": 9.4,
+    "ext2": 61.1
+   },
+   "pose_delta": {
+    "ext1": {
+     "trans_cm": 4.9,
+     "rot_deg": 24.3,
+     "would_agree": true
+    },
+    "ext2": {
+     "trans_cm": 58.4,
+     "rot_deg": 120.7,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01788_ep032_f00297.jpg"
+  },
+  {
+   "episode_id": "shard01788_ep032",
+   "object_name": "sneaker",
+   "frame": 352,
+   "n_frames": 390,
+   "status": "fwd_single",
+   "lone_cam": "wrist",
+   "edges": {
+    "wrist": 0.1332,
+    "ext1": 0.5583,
+    "ext2": 0.6606
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "ext1": 15.5,
+    "ext2": 47.1
+   },
+   "pose_delta": {
+    "ext1": {
+     "trans_cm": 13.4,
+     "rot_deg": 40.3,
+     "would_agree": false
+    },
+    "ext2": {
+     "trans_cm": 46.9,
+     "rot_deg": 100.5,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01788_ep032_f00352.jpg"
+  },
+  {
+   "episode_id": "shard01963_ep003",
+   "object_name": "can",
+   "frame": 164,
+   "n_frames": 742,
+   "status": "fwd_single",
+   "lone_cam": "ext2",
+   "edges": {
+    "wrist": null,
+    "ext1": null,
+    "ext2": 0.0
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 26.7,
+    "ext1": 4.7
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 25.5,
+     "rot_deg": 99.0,
+     "would_agree": false
+    },
+    "ext1": {
+     "trans_cm": 1.4,
+     "rot_deg": 55.2,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01963_ep003_f00164.jpg"
+  },
+  {
+   "episode_id": "shard01963_ep003",
+   "object_name": "can",
+   "frame": 166,
+   "n_frames": 742,
+   "status": "fwd_single",
+   "lone_cam": "ext2",
+   "edges": {
+    "wrist": null,
+    "ext1": null,
+    "ext2": 0.0
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 27.2,
+    "ext1": 6.1
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 26.2,
+     "rot_deg": 106.8,
+     "would_agree": false
+    },
+    "ext1": {
+     "trans_cm": 2.3,
+     "rot_deg": 72.6,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01963_ep003_f00166.jpg"
+  },
+  {
+   "episode_id": "shard01963_ep003",
+   "object_name": "can",
+   "frame": 167,
+   "n_frames": 742,
+   "status": "fwd_single",
+   "lone_cam": "ext2",
+   "edges": {
+    "wrist": null,
+    "ext1": null,
+    "ext2": 0.0
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 27.4,
+    "ext1": 5.4
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 26.3,
+     "rot_deg": 107.0,
+     "would_agree": false
+    },
+    "ext1": {
+     "trans_cm": 1.5,
+     "rot_deg": 71.7,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01963_ep003_f00167.jpg"
+  },
+  {
+   "episode_id": "shard01963_ep003",
+   "object_name": "can",
+   "frame": 169,
+   "n_frames": 742,
+   "status": "fwd_single",
+   "lone_cam": "ext2",
+   "edges": {
+    "wrist": null,
+    "ext1": null,
+    "ext2": 0.0
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 27.2,
+    "ext1": 5.3
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 26.3,
+     "rot_deg": 103.7,
+     "would_agree": false
+    },
+    "ext1": {
+     "trans_cm": 1.4,
+     "rot_deg": 51.8,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01963_ep003_f00169.jpg"
+  },
+  {
+   "episode_id": "shard01963_ep003",
+   "object_name": "can",
+   "frame": 658,
+   "n_frames": 742,
+   "status": "fwd_single",
+   "lone_cam": "ext2",
+   "edges": {
+    "wrist": null,
+    "ext1": 0.2171,
+    "ext2": 0.0
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 25.1,
+    "ext1": 4.6
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 22.7,
+     "rot_deg": 143.0,
+     "would_agree": false
+    },
+    "ext1": {
+     "trans_cm": 1.6,
+     "rot_deg": 66.2,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01963_ep003_f00658.jpg"
+  },
+  {
+   "episode_id": "shard01963_ep003",
+   "object_name": "can",
+   "frame": 660,
+   "n_frames": 742,
+   "status": "fwd_single",
+   "lone_cam": "ext2",
+   "edges": {
+    "wrist": null,
+    "ext1": 0.3941,
+    "ext2": 0.0
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 26.7,
+    "ext1": 6.6
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 23.9,
+     "rot_deg": 142.1,
+     "would_agree": false
+    },
+    "ext1": {
+     "trans_cm": 2.4,
+     "rot_deg": 62.8,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01963_ep003_f00660.jpg"
+  },
+  {
+   "episode_id": "shard01979_ep002",
+   "object_name": "glass lid",
+   "frame": 99,
+   "n_frames": 194,
+   "status": "bwd_single",
+   "lone_cam": "ext2",
+   "edges": {
+    "wrist": 0.5772,
+    "ext1": 3.0138,
+    "ext2": 0.1033
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 22.4,
+    "ext1": 16.2
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 11.4,
+     "rot_deg": 63.0,
+     "would_agree": false
+    },
+    "ext1": {
+     "trans_cm": 7.2,
+     "rot_deg": 30.8,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01979_ep002_f00099.jpg"
+  },
+  {
+   "episode_id": "shard01979_ep002",
+   "object_name": "glass lid",
+   "frame": 100,
+   "n_frames": 194,
+   "status": "bwd_single",
+   "lone_cam": "ext2",
+   "edges": {
+    "wrist": 0.557,
+    "ext1": 3.3352,
+    "ext2": 0.1448
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 23.7,
+    "ext1": 11.5
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 11.9,
+     "rot_deg": 51.3,
+     "would_agree": false
+    },
+    "ext1": {
+     "trans_cm": 8.9,
+     "rot_deg": 15.0,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01979_ep002_f00100.jpg"
+  },
+  {
+   "episode_id": "shard01979_ep002",
+   "object_name": "glass lid",
+   "frame": 101,
+   "n_frames": 194,
+   "status": "bwd_single",
+   "lone_cam": "ext2",
+   "edges": {
+    "wrist": 0.5356,
+    "ext1": 3.4732,
+    "ext2": 0.1206
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 21.8,
+    "ext1": 11.3
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 10.5,
+     "rot_deg": 48.8,
+     "would_agree": false
+    },
+    "ext1": {
+     "trans_cm": 8.5,
+     "rot_deg": 15.0,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01979_ep002_f00101.jpg"
+  },
+  {
+   "episode_id": "shard01979_ep002",
+   "object_name": "glass lid",
+   "frame": 103,
+   "n_frames": 194,
+   "status": "bwd_single",
+   "lone_cam": "ext2",
+   "edges": {
+    "wrist": 0.4933,
+    "ext1": 3.9722,
+    "ext2": 0.1134
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 18.8,
+    "ext1": 10.0
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 9.7,
+     "rot_deg": 34.6,
+     "would_agree": false
+    },
+    "ext1": {
+     "trans_cm": 8.8,
+     "rot_deg": 5.1,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01979_ep002_f00103.jpg"
+  },
+  {
+   "episode_id": "shard01979_ep002",
+   "object_name": "glass lid",
+   "frame": 104,
+   "n_frames": 194,
+   "status": "bwd_single",
+   "lone_cam": "ext2",
+   "edges": {
+    "wrist": 0.4528,
+    "ext1": 4.517,
+    "ext2": 0.1222
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 10.6,
+    "ext1": 9.7
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 4.8,
+     "rot_deg": 21.0,
+     "would_agree": true
+    },
+    "ext1": {
+     "trans_cm": 8.8,
+     "rot_deg": 3.8,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01979_ep002_f00104.jpg"
+  },
+  {
+   "episode_id": "shard01979_ep002",
+   "object_name": "glass lid",
+   "frame": 105,
+   "n_frames": 194,
+   "status": "bwd_single",
+   "lone_cam": "ext2",
+   "edges": {
+    "wrist": 0.4171,
+    "ext1": 4.2374,
+    "ext2": 0.1496
+   },
+   "has_pose": {
+    "wrist": true,
+    "ext1": true,
+    "ext2": true
+   },
+   "dist_to_emitted_cm": {
+    "wrist": 10.9,
+    "ext1": 11.5
+   },
+   "pose_delta": {
+    "wrist": {
+     "trans_cm": 5.5,
+     "rot_deg": 20.0,
+     "would_agree": false
+    },
+    "ext1": {
+     "trans_cm": 10.0,
+     "rot_deg": 5.9,
+     "would_agree": false
+    }
+   },
+   "image": "assets/singlecam/shard01979_ep002_f00105.jpg"
+  }
+ ]
+}
